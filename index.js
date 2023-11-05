@@ -1,12 +1,14 @@
 var jsonAdatok;
 var xhr = new XMLHttpRequest();
-xhr.open("GET", "listhonnan.json", true);
+xhr.open("GET", "mejson.json", true);
 xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-        var data = JSON.parse(xhr.responseText)[0];
+        var data = JSON.parse(xhr.responseText);
         jsonAdatok = xhr.responseText;
-        document.getElementById("honnan").innerHTML = `<li onclick="hozzaad(this, 'honnanvalaszt')">${data.honnan}</li>`;
-        document.getElementById("hova").innerHTML = `<li onclick="hozzaad(this, 'hovavalaszt')">${data.hova}</li>`;
+        data.forEach(i => {
+            document.getElementById("honnan").innerHTML += `<li onclick="hozzaad(this, 'honnanvalaszt')">${i.honnan}</li>`;
+            document.getElementById("hova").innerHTML += `<li onclick="hozzaad(this, 'hovavalaszt')">${i.hova}</li>`;
+        })
 
     }
 };
@@ -25,7 +27,7 @@ function keres() {
     }
     adatok.forEach(i => {
         if (i.honnan == honnan && i.hova == hova) {
-            document.body.innerHTML += i.indulas + "------------" + i.erkezes;
+            document.getElementById("kiiras").innerHTML += i.indulas + "------------" + i.erkezes;
         }
     });
 
