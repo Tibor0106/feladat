@@ -22,15 +22,14 @@ function keres() {
     var honnan = document.getElementById("honnanvalaszt").textContent;
     var hova = document.getElementById("hovavalaszt").textContent;
     var adatok = JSON.parse(jsonAdatok);
-    if (adatok.length == 0) {
-        return alert("Nem található adat!")
-    }
+    var van = false
     adatok.forEach(i => {
         if (i.honnan == honnan && i.hova == hova) {
-            document.getElementById("kiiras").innerHTML += i.indulas + "------------" + i.erkezes;
+            document.getElementById("eredmeny").innerHTML += i.indulas + "------------" + i.erkezes;
+            van = true;
         }
     });
-
-
-
+    if (!van) {
+        return alert("Nem található adat!")
+    }
 }
